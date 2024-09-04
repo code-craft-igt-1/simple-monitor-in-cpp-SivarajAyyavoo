@@ -6,18 +6,15 @@
 using std::cout, std::flush, std::this_thread::sleep_for, std::chrono::seconds;
 
 namespace health_monitor {
-    bool checkValues(float inputValue, float lowerRange, float upperRange)
-    {
+    bool checkValues(float inputValue, float lowerRange, float upperRange) {
         bool isValueWithinRange = true;
-        if (inputValue > upperRange || inputValue < lowerRange)
-        {
+        if (inputValue > upperRange || inputValue < lowerRange) {
             isValueWithinRange = false;
         }
         return isValueWithinRange;
     }
 
-    void introduceDelay()
-    {
+    void introduceDelay() {
         for (int i = 0; i < 6; i++) {
             cout << "\r* " << flush;
             sleep_for(seconds(1));
@@ -44,4 +41,4 @@ namespace health_monitor {
         }
         return 1;
     }
-} //  namespace health_monitor
+}  // namespace health_monitor
