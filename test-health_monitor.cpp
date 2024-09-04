@@ -4,7 +4,7 @@
 
 namespace health_monitor {
 namespace test {
-    TEST(HealthMonitor, NotOkWhenTempOffRange) {
+    TEST(HealthMonitor, NotOkWhenTempIsOffRange) {
         // Test the Lower bound
         ASSERT_FALSE(vitalsOk(90, 90, 95));
         // Test the Upper bound
@@ -23,8 +23,7 @@ namespace test {
         ASSERT_FALSE(vitalsOk(99, 90, 80));
     }
 
-    TEST(HealthMonitor, OkWhenAllVitalsAreInRange)
-    {
+    TEST(HealthMonitor, OkWhenAllVitalsAreInRange) {
         ASSERT_TRUE(vitalsOk(98.1, 70, 98));
     }
 }  // namespace test
