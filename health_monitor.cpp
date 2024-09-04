@@ -28,11 +28,13 @@ namespace health_monitor {
             cout << "Temperature is critical!\n";
             introduceDelay();
             return 0;
-        } else if (checkValues(pulseRate, 60.0f, 100.0f)) {
+        }
+        if (checkValues(pulseRate, 60.0f, 100.0f)) {
             cout << "Pulse Rate is out of range!\n";
             introduceDelay();
             return 0;
-        } else if (checkValues(spo2, 90.0f, 100.0f)) {
+        }
+        if (checkValues(spo2, 90.0f, 100.0f)) {
             cout << "Oxygen Saturation out of range!\n";
             introduceDelay();
             return 0;
