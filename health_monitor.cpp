@@ -24,21 +24,24 @@ namespace health_monitor {
     }
 
     int vitalsOk(float temperature_in_f, float pulseRate, float spo2) {
-        if (checkValues(temperature_in_f, 95.0f, 102.0f)) {
-            cout << "Temperature is critical!\n";
+        bool isTempCritical = checkValues(temperature_in_f, 95.0f, 102.0f);
+        bool isPulseOutOfRange = checkValues(pulseRate, 60.0f, 100.0f);
+        bool isSpo2OutOfRange = checkValues(spo2, 90.0f, 100.0f);
+
+        if (isTempCritical || isPulseOutOfRange || isSpo2OutOfRange) {
+            if (isTempCritical) {
+                cout << "Temperature is critical!\n";
+            }
+            else if (isPulseOutOfRange) {
+                cout << "Pulse Rate is out of range!\n";
+            }
+            else if (isSpo2OutOfRange) {
+                cout << "Oxygen Saturation out of range!\n";
+            }
             introduceDelay();
             return 0;
         }
-        if (checkValues(pulseRate, 60.0f, 100.0f)) {
-            cout << "Pulse Rate is out of range!\n";
-            introduceDelay();
-            return 0;
-        }
-        if (checkValues(spo2, 90.0f, 100.0f)) {
-            cout << "Oxygen Saturation out of range!\n";
-            introduceDelay();
-            return 0;
-        }
+
         return 1;
     }
 }  // namespace health_monitor
