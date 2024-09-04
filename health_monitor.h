@@ -17,6 +17,6 @@ namespace health_monitor {
     bool isInputValueWithinRange(float inputValue, float lowerRange, float upperRange);
     void introduceDelay();
     int vitalsOk(float temperature_in_f, float pulseRate, float spo2);
-}  // health_monitor
+}  // namespace health_monitor
 
 #endif  // HEALTH_MONITOR_H_
