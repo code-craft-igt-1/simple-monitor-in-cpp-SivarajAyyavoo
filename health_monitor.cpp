@@ -20,7 +20,7 @@ namespace health_monitor {
     }
 
     int vitalsOk(float temperature_in_f, float pulseRate, float spo2) {
-        bool isTempCritical = isInputValueWithinRange(temperature_in_f, 
+        bool isTempCritical = isInputValueWithinRange(temperature_in_f,
             TEMP_IN_F_MIN, TEMP_IN_F_MAX);
         bool isPulseOutOfRange = isInputValueWithinRange(pulseRate, PULSE_MIN, PULSE_MAX);
         bool isSpo2OutOfRange = isInputValueWithinRange(spo2, SPO2_MIN, SPO2_MAX);
