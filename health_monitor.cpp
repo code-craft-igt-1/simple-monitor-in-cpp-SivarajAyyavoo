@@ -25,6 +25,8 @@ namespace health_monitor {
         bool isPulseOutOfRange = isInputValueWithinRange(pulseRate, PULSE_MIN, PULSE_MAX);
         bool isSpo2OutOfRange = isInputValueWithinRange(spo2, SPO2_MIN, SPO2_MAX);
 
+        // Temporary solution to handle CCN
+        // Rework is needed
         if (isTempCritical | isPulseOutOfRange | isSpo2OutOfRange) {
             cout << "One of the vital (Temperature/Pulse/Spo2 is out of range !\n";
             introduceDelay();
