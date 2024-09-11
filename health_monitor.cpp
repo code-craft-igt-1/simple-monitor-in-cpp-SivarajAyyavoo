@@ -23,8 +23,7 @@ namespace health_monitor {
         std::string msg = VITALS_IN_DIFF_LANG[LANGUAGE_USED][vitalNum];
         if (VitalAlertLevel::WARNING == vitalAlertLevel) {
             msg += WARNING_IN_DIFF_LANG[LANGUAGE_USED];
-        }
-        else if (VitalAlertLevel::OUT_OF_RANGE == vitalAlertLevel) {
+        } else if (VitalAlertLevel::OUT_OF_RANGE == vitalAlertLevel) {
             msg += OUT_OF_RANGE_IN_DIFF_LANG[LANGUAGE_USED];
         }
         return msg;
@@ -58,7 +57,6 @@ namespace health_monitor {
             if (isVitalOutOfRange(testResult[vitalNum], vitalNum)) {
                 return vitalNum;
             }
-
         }
         return VitalStatus::ALL_VITALS_OK;
     }
