@@ -30,24 +30,36 @@ namespace health_monitor {
         return msg;
     }
 
+    void isVitalCritical(float vitalValue, int vitalNum) {
+        if (isInputValueWithinRange(vitalValue, VITALS_OUT_OF_RANGE_MIN_VAL[vitalNum],
+            VITALS_WARNING_MIN_VAL[vitalNum]) ||
+            isInputValueWithinRange(vitalValue, VITALS_WARNING_MAX_VAL[vitalNum],
+                VITALS_OUT_OF_RANGE_MAX_VAL[vitalNum])) {
+            sendMessage(vitalNum, VitalAlertLevel::WARNING);
+        }
+    }
+
+    bool isVitalOutOfRange(float vitalValue, int vitalNum) {
+        bool result = false;
+        if (!isInputValueWithinRange(vitalValue, VITALS_OUT_OF_RANGE_MIN_VAL[vitalNum],
+            VITALS_OUT_OF_RANGE_MAX_VAL[vitalNum])) {
+            sendAlert();
+            sendMessage(vitalNum, VitalAlertLevel::OUT_OF_RANGE);
+            result = true;
+        }
+        return result;
+    }
+
     int vitalsOk(float temperature_in_f, float pulseRate, float spo2) {
         float testResult[NO_OF_VITALS] = { temperature_in_f, pulseRate, spo2 };
 
         for (unsigned int vitalNum = 0; vitalNum < NO_OF_VITALS; vitalNum++) {
-            if (isInputValueWithinRange(testResult[vitalNum], VITALS_OUT_OF_RANGE_MIN_VAL[vitalNum],
-                VITALS_WARNING_MIN_VAL[vitalNum]) ||
-                isInputValueWithinRange(testResult[vitalNum], VITALS_WARNING_MAX_VAL[vitalNum],
-                VITALS_OUT_OF_RANGE_MAX_VAL[vitalNum])) {
-                sendMessage(vitalNum, VitalAlertLevel::WARNING);
-            }
-            if (!isInputValueWithinRange(testResult[vitalNum], VITALS_OUT_OF_RANGE_MIN_VAL[vitalNum],
-                VITALS_OUT_OF_RANGE_MAX_VAL[vitalNum])) {
-                sendAlert();
-                sendMessage(vitalNum, VitalAlertLevel::OUT_OF_RANGE);
+            isVitalCritical(testResult[vitalNum], vitalNum);
+            if (isVitalOutOfRange(testResult[vitalNum], vitalNum)) {
                 return vitalNum;
             }
-        }
 
+        }
         return VitalStatus::ALL_VITALS_OK;
     }
 }  // namespace health_monitor

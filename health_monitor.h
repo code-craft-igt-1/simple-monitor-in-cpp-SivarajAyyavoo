@@ -46,6 +46,8 @@ namespace health_monitor {
     void sendAlert();
     int vitalsOk(float temperature_in_f, float pulseRate, float spo2);
     std::string sendMessage(int vitalNum, VitalAlertLevel vitalAlertLevel);
+    void isVitalCritical(float vitalValue, int vitalNum);
+    bool isVitalOutOfRange(float vitalValue, int vitalNum);
 }  // namespace health_monitor
 
 
